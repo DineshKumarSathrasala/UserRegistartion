@@ -5,8 +5,8 @@ var Role = require('../models/role');
 var passport = require('passport');
 var authenticate = require('../authenticate');
 
-router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-  User.find({})
+router.get('/', authenticate.verifyUser, (req, res, next) => {
+  User.findById(req.user._id)
     .populate('role')
     .then((users) => {
         res.statusCode = 200;
